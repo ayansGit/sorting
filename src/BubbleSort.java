@@ -20,17 +20,18 @@ public class BubbleSort {
         int N = input.size();
         for(int i=0; i<N-1; i++){
             boolean isSwapped = false;
-            for(int j=0; j<N-i-1; i++) {
+            for(int j=0; j<N-i-1; j++) {
                 if (input.get(j) > input.get(j + 1)) {
                     Util.swap(input, j, j + 1);
                     isSwapped = true;
                 }
             }
+
             if(!isSwapped)
                 break;
         }
         long endTime = System.nanoTime();
-        System.out.println("Bubble Sort: Elapsed Time in nano seconds: "+ (endTime-startTime));
+        System.out.println("Bubble Sort: Elapsed Time in milli seconds: "+ (double)(endTime-startTime)/1000000);
         return input;
     }
 }

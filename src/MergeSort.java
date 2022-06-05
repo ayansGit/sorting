@@ -5,6 +5,10 @@ public class MergeSort {
 
     ArrayList<Integer> input = new ArrayList<>();
 
+    public MergeSort() {
+
+    }
+
     public MergeSort(ArrayList<Integer> input) {
         this.input = input;
     }
@@ -14,7 +18,7 @@ public class MergeSort {
         long startTime = System.nanoTime();
         mergeSort(input, 0, e);
         long endTime = System.nanoTime();
-        System.out.println("Merge Sort: Elapsed Time in nano seconds: "+ (endTime-startTime));
+        System.out.println("Merge Sort: Elapsed Time in milli seconds: "+ (double)(endTime-startTime)/1000000);
         return input;
     }
 
@@ -37,38 +41,69 @@ public class MergeSort {
     }
 
     private void mergeSortedArray(ArrayList<Integer> A, int s, int mid, int e){
-        int p1 = 0;
-        int p2 = 0;
-        int p3= s;
-        int n1 = mid - s + 1;
-        int n2 = e - mid;
-        ArrayList<Integer> T = new ArrayList(e-s+1);
-        List<Integer> T1 =A.subList(s, mid+1);
-        List<Integer> T2 =A.subList(mid+1, e+1);
-        while (p1<n1 && p2<n2){
-            if(T1.get(p1)< T2.get(p2)){
-                A.set(p3, T1.get(p1));
+        int p1 = s;
+        int p2 = mid+1;
+        List<Integer> T = new ArrayList();
+
+        while (p1<=mid && p2<=e){
+            if(A.get(p1)< A.get(p2)){
+                T.add(A.get(p1));
                 p1++;
-                p3++;
             }else {
-                A.set(p3, T2.get(p2));
-                p3++;
+                T.add(A.get(p2));
                 p2++;
             }
         }
-        while (p1<n1){
-            A.set(p3, T1.get(p1));
+        while (p1<=mid){
+            T.add(A.get(p1));
             p1++;
-            p3++;
         }
-        while (p2<n2){
-            A.set(p3, T2.get(p2));
+        while (p2<=e){
+            T.add(A.get(p2));
             p2++;
-            p3++;
         }
-//        for(int i = 0; i<(e-s+1); i++){
-//            A.set((i+s), T.get(i));
-//        }
+
+        for(int i = 0; i<T.size(); i++){
+            A.set((i+s), T.get(i));
+        }
     }
 
+    /**
+     * Merge the two sorted array to make a sorted array.
+     * @param A Sorted Array
+     * @param B Sorted Array
+     */
+    public ArrayList<Integer> question1(ArrayList<Integer> A, ArrayList<Integer> B){
+        System.out.println("Merge the two sorted array to make a sorted array.");
+        System.out.println("A: "+A);
+        System.out.println("B: "+B);
+        ArrayList<Integer> ans = new ArrayList();
+
+        int n = A.size();
+        int m = B.size();
+
+        int p1=0;
+        int p2=0;
+
+        while (p1<n && p2<m){
+            if(A.get(p1)<B.get(p2)){
+                ans.add(A.get(p1));
+                p1++;
+            }else {
+                ans.add(B.get(p2));
+                p2++;
+            }
+        }
+
+        while (p1<n){
+            ans.add(A.get(p1));
+            p1++;
+        }
+        while (p2<m){
+            ans.add(B.get(p2));
+            p2++;
+        }
+
+        return ans;
+    }
 }

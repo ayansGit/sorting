@@ -34,7 +34,7 @@ public class SelectionSort {
             }
         }
         long endTime = System.nanoTime();
-        System.out.println("Selection Sort: Elapsed Time in nano seconds: "+ (endTime-startTime));
+        System.out.println("Selection Sort: Elapsed Time in milli seconds: "+ (double)(endTime-startTime)/1000000);
         return input;
     }
 
